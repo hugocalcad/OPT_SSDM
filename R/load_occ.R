@@ -120,6 +120,8 @@ load_occ <- function(path = getwd(), Env, file = NULL, ..., Xcol = "Longitude",
           deleted <- c(deleted, occ.indices[i])
         }
       }
+
+      
       deleted <- row.names(SpOccurrences[deleted, ])
       deleted <- which(row.names(Occurrences) %in% deleted)
       if (length(deleted) > 0) {

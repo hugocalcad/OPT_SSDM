@@ -1,7 +1,7 @@
-Package: SSDM
+Package: OptSSDMv2
 Type: Package
 Title: Stacked Species Distribution Modelling
-Version: 0.2.3.9008
+Version: 2.1.1.1.1
 Author: Sylvain Schmitt, Robin Pouteau, Dimitri Justeau, Florian de Boissieu, Philippe Birnbaum
 Maintainer: Sylvain Schmitt <sylvain.schmitt@agroparistech.fr>
 URL: https://github.com/sylvainschmitt/SSDM
@@ -72,7 +72,7 @@ Suggests:
     knitr,
     rmarkdown,
     rgdal
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 VignetteBuilder: 
     knitr,
     rmarkdown,
