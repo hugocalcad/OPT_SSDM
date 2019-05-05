@@ -1,6 +1,6 @@
 Package: OptSSDMv1
 Type: Package
-Title: Stacked Species Distribution Modelling
+Title: Optimizacion SSDM (Stacked Species Distribution Modelling)
 Version: 1.1.1.1.1
 Author: Sylvain Schmitt, Robin Pouteau, Dimitri Justeau, Florian de Boissieu, Philippe Birnbaum
 Maintainer: Sylvain Schmitt <sylvain.schmitt@agroparistech.fr>
@@ -78,3 +78,4 @@ VignetteBuilder:
     knitr,
     rmarkdown,
     rgdal
+Encoding: UTF-8
