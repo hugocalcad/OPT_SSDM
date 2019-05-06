@@ -23,9 +23,6 @@ setMethod("project", "Algorithm.SDM", function(obj, Env, ...) {
     # }
     
     ##Usando lapply
-    
-    
-    
     mi_funcion =  function(i){
         if (Env[[i]]@data@isfactor) {
           x[, i] = as.factor(x[, i])
@@ -54,13 +51,25 @@ setMethod("project", "MAXENT.SDM", function(obj, Env, ...) {
   model = get_model(obj, Env, ...)
   proj = raster::predict(Env, model, fun = function(model, x) {
     x = as.data.frame(x)
-    for (i in seq_len(length(Env@layers))) {
+    # for (i in seq_len(length(Env@layers))) {
+    #   if (Env[[i]]@data@isfactor) {
+    #     x[, i] = as.factor(x[, i])
+    #     x[, i] = droplevels(x[, i])
+    #     levels(x[, i]) = Env[[i]]@data@attributes[[1]]$ID
+    #   }
+    # }
+    
+    ##Usando lapply
+    mi_funcion =  function(i){
       if (Env[[i]]@data@isfactor) {
         x[, i] = as.factor(x[, i])
         x[, i] = droplevels(x[, i])
         levels(x[, i]) = Env[[i]]@data@attributes[[1]]$ID
       }
     }
+    
+    lapply(seq_len(length(Env@layers)),mi_funcion)
+    ##Fin lapply
     return(predict(model, x))
   })
   # Rescaling projection
