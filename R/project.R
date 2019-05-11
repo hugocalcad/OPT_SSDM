@@ -16,9 +16,9 @@ setMethod("project", "Algorithm.SDM", function(obj, Env, ...) {
   path <- tempdir()
   if (!(file.path(path, ".rasters_2") %in% list.dirs(path)))
   {  dir.create(paste0(path, "/.rasters_2"))}
-  
+
   n <- 2
-  
+
   for (i in seq_len(length(Env@layers))) {
      splitRaster(Env[[i]], n, n, path = paste0(path, "/.rasters_2/", names(Env[[i]])))
   }
@@ -26,6 +26,7 @@ setMethod("project", "Algorithm.SDM", function(obj, Env, ...) {
   proj_2 <- list()
   for(i in seq_len(n*n)){
   ##reclasificar
+    cat("--- Empezando ....", obj@name)
     listado_completo <- list.files(paste0(path, "/.rasters_2") , pattern = paste("*tile",i,".gri$", sep = ''), recursive = TRUE, full.names = TRUE )
     Env_temp <- raster::stack(listado_completo)
     proj_3 = suppressWarnings(raster::predict(Env_temp, model, fun = function(model,x) {
@@ -40,8 +41,9 @@ setMethod("project", "Algorithm.SDM", function(obj, Env, ...) {
       return(predict(model, x))
     }))
     # Rescaling projection
-    proj_2[i] = reclassify(proj_3, c(-Inf, 0, 0))
-  }  
+    proj_2[[i]] = reclassify(proj_3, c(-Inf, 0, 0))
+    cat('.....terminado', i, "--\n")
+  }
   ##Mosaic -> recomponiendo los rasters
   proj <- mergeRaster(proj_2)
   unlink(file.path(path, ".rasters_2"), recursive=TRUE)
@@ -66,23 +68,24 @@ setMethod("project", "MAXENT.SDM", function(obj, Env, ...) {
   path <- tempdir()
   if (!(file.path(path, ".rasters_2") %in% list.dirs(path)))
   {  dir.create(paste0(path, "/.rasters_2"))}
-  
+
   n <- 2
-  
+
   for (i in seq_len(length(Env@layers))) {
     splitRaster(Env[[i]], n, n, path = paste0(path, "/.rasters_2/", names(Env[[i]])))
   }
   ##
   proj_2 <- list()
   for(i in seq_len(n*n)){
+    cat("Ejecutando ......", obj@name)
     ##reclasificar
     listado_completo <- list.files(paste0(path, "/.rasters_2") , pattern = paste("*tile",i,".gri$", sep = ''), recursive = TRUE, full.names = TRUE )
     Env_temp <- raster::stack(listado_completo)
-    
+
     proj_3 = raster::predict(Env_temp, model, fun = function(model, x) {
       x = as.data.frame(x)
       for (j in seq_len(length(Env@layers))) {
-        if (Env[[j]]@data@isfactor) {
+        if (Env_temp[[j]]@data@isfactor) {
           x[, j] = as.factor(x[, j])
           x[, j] = droplevels(x[, j])
           levels(x[, j]) = Env_temp[[j]]@data@attributes[[1]]$ID
@@ -91,7 +94,8 @@ setMethod("project", "MAXENT.SDM", function(obj, Env, ...) {
       return(predict(model, x))
     })
     # Rescaling projection
-    proj_2[i] = reclassify(proj_3, c(-Inf, 0, 0))
+    proj_2[[i]] = reclassify(proj_3, c(-Inf, 0, 0))
+    cat('.....terminado', i, "--\n")
   }
   ##Mosaic -> recomponiendo los rasters
   proj <- mergeRaster(proj_2)
