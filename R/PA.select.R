@@ -36,17 +36,17 @@ setMethod('PA.select', "Algorithm.SDM", function(obj, Env, PA = NULL, verbose = 
   # Pseudo-Absences selection
   data.PA = data.frame(matrix(nrow = 0, ncol = 2))
   names(data.PA) = c('X','Y')
-  if(PA$nb < 100) {nb = PA$nb*PA$nb} else {nb = 1000}
-  while (length(data.PA[,1]) < PA$nb) {
+  nb = 1000
+  while (length(data.PA[,1]) < nb) {
     X = runif(nb, min = bbox(Mask)[1,1], max = bbox(Mask)[1,2])
     Y = runif(nb, min = bbox(Mask)[2,1],max = bbox(Mask)[2,2])
     points = data.frame(X = X, Y = Y)
     check = extract(Mask, points)
-    if(length(is.na(check)) > 0)
+    if(sum(is.na(check)) > 0)
       points = points[-which(is.na(check)),]
     data.PA = rbind(data.PA, points)
   }
-  data.PA = data.PA[1:PA$nb,]
+  data.PA = data.PA[1:nb,]
   data.PA$Presence = 0
   # A bug can appear here if obj@data coordinates are consider as factors,
   # it can happen if occurences are not well loaded and decimal is not well defined

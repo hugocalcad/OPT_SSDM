@@ -21,6 +21,7 @@ setMethod("project", "Algorithm.SDM", function(obj, Env, ...) {
     }
     return(predict(model, x))
   }))
+  cat('Model ', obj@name, " termino.\n")
   # Rescaling projection
   proj = reclassify(proj, c(-Inf, 0, 0))
   if(all(obj@data$Presence %in% c(0,1))) # MEMs should not be rescaled
@@ -44,8 +45,10 @@ setMethod("project", "MAXENT.SDM", function(obj, Env, ...) {
         levels(x[, i]) = Env[[i]]@data@attributes[[1]]$ID
       }
     }
+
     return(predict(model, x))
   })
+  cat('Model ', obj@name, " termino.\n")
   # Rescaling projection
   proj = reclassify(proj, c(-Inf, 0, 0))
   if(!all(obj@data$Presence %in% c(0,1))) # MEMs should not be rescaled
