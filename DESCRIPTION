@@ -1,7 +1,7 @@
 Package: OptSSDMv2
 Type: Package
 Title: Stacked Species Distribution Modelling
-Version: 2.1.1.1.1
+Version: 2.1.1.1.2
 Author: Sylvain Schmitt, Robin Pouteau, Dimitri Justeau, Florian de Boissieu, Philippe Birnbaum
 Maintainer: Sylvain Schmitt <sylvain.schmitt@agroparistech.fr>
 URL: https://github.com/sylvainschmitt/SSDM
@@ -14,7 +14,8 @@ Description: Allows to map species richness and endemism based on stacked
     algorithm correlation. Methods to stack individual SDMs include summing
     individual probabilities and thresholding then summing. Thresholding can be
     based on a specific evaluation metric or by drawing repeatedly from a Bernoulli
-    distribution. The SSDM package also provides a user-friendly interface.
+    distribution. The SSDM package also provides a user-friendly interface
+    FIX pa.SELECT Y LOAD_OCC.
 License: GPL (>=3) | file LICENSE
 LazyData: TRUE
 Imports:

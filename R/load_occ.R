@@ -120,8 +120,8 @@ load_occ <- function(path = getwd(), Env, file = NULL, ..., Xcol = "Longitude",
   #         deleted <- c(deleted, occ.indices[i])
   #       }
   #     }
-  # 
-  #     
+  #
+  #
   #     deleted <- row.names(SpOccurrences[deleted, ])
   #     deleted <- which(row.names(Occurrences) %in% deleted)
   #     if (length(deleted) > 0) {
@@ -151,13 +151,13 @@ load_occ <- function(path = getwd(), Env, file = NULL, ..., Xcol = "Longitude",
       }
       occ.indices <- c(seq_len(length(row.names(SpOccurrences))))
       res.indices <- as.numeric(row.names(thin.result[[1]]))
-      for (i in seq_len(length(occ.indices))) {
-        if (!(occ.indices[i] %in% res.indices)) {
+      for (j in seq_len(length(occ.indices))) {
+        if (!(occ.indices[j] %in% res.indices)) {
           deleted <- c(deleted, occ.indices[i])
         }
       }
-      
-      
+
+
       deleted <- row.names(SpOccurrences[deleted, ])
       deleted <- which(row.names(Occurrences) %in% deleted)
       if (length(deleted) > 0) {
@@ -167,7 +167,7 @@ load_occ <- function(path = getwd(), Env, file = NULL, ..., Xcol = "Longitude",
   }
   lapply(seq_len(length(levels(Occurrences[, which(names(Occurrences) == Spcol)]))),mi_funcion)
   #fin funciion
-  
+
   Occurrences <- droplevels(Occurrences)
 
   # Test species occurrences > 3
@@ -199,9 +199,9 @@ load_occ <- function(path = getwd(), Env, file = NULL, ..., Xcol = "Longitude",
   }
   lapply(seq_len(length(levels(Occurrences[, which(names(Occurrences) == Spcol)]))), mi_funcion)
   #fin lapply
-  
-  
-  
+
+
+
   if (Spcol == "SpNULL") {
     Occurrences <- Occurrences[-which(names(Occurrences) == "SpNULL")]
   }

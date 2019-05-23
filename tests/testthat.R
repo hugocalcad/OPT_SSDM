@@ -1,4 +1,4 @@
 library(testthat)
-library(SSDM)
+library(OptSSDMv2)
 
-test_check("SSDM")
+test_check("OptSSDMv2")

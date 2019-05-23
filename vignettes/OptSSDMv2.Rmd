@@ -34,8 +34,8 @@ Rasters of environmental data need to have the same coordinate reference system 
 ‘SSDM’ include `load_var` function to read raster files including your environmental variables. We will work with three 30 arcsec-resolution rasters covering the north part of the main island of New Caledonia ’Grande Terre’. Climatic variables (RAINFALL and TEMPERATURE) are from the WorldClim database, and the SUBSTRATE map is from the IRD Atlas of New Caledonia (2012) (see `?Env`).  
 
 ```{r Environmental variables}
-library(SSDM)
-Env <- load_var(system.file('extdata',  package = 'SSDM'), categorical = 'SUBSTRATE', verbose = FALSE)
+library(OptSSDMv2)
+Env <- load_var(system.file('extdata',  package = 'OptSSDMv2'), categorical = 'SUBSTRATE', verbose = FALSE)
 Env
 ```
 
@@ -51,7 +51,7 @@ Species distribution models are built on natural history records.
 ‘SSDM’ include `load_occ` function to read raw csv or txt files including your natural history records. We will work with natural history records from five Cryptocarya species native to New Caledonia (see `?Occurrences`).  
 
 ```{r Natural history records}
-Occ <- load_occ(path = system.file('extdata',  package = 'SSDM'), Env,
+Occ <- load_occ(path = system.file('extdata',  package = 'OptSSDMv2'), Env,
          Xcol = 'LONGITUDE', Ycol = 'LATITUDE',
          file = 'Occurrences.csv', sep = ',', verbose = FALSE)
 head(Occ)
